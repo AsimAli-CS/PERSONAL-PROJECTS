@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/img6"
+    tools:context=".MainActivity">
+
+    <!-- display Buttons in different lines -->
+    <Button
+        android:id="@+id/frag1_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Hide Transactions"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/showTransactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Show Transactions"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- display Fragment below the Buttons -->
+    <fragment
+        android:id="@+id/fragments"
+        android:name="com.example.myapplication.Fragment1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
