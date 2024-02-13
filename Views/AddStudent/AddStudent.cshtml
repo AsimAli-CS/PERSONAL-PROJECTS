@@ -1,0 +1,397 @@
+﻿@model ProjectStudentSystem.Models.Interest
+
+@{
+    ViewBag.Title = "Student Interests System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* @{
+    var interestsViewModel = ViewBag.InterestsViewModel;
+} *@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Interests System</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%; /* Decreased the width to 60% */
+            margin: 20px auto;
+        }
+
+        form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+            box-sizing: border-box; /* Include padding and border in the total width/height */
+        }
+
+        h2 {
+            color: #ff4500;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+            .form-row label {
+                float: left;
+                width: 45%;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
+
+            .form-row input,
+            .form-row select {
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                padding: 8px;
+                margin-left: 5px;
+                background-color: #555;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+            }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #bd2525;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        /* Center the form on larger screens */
+        media (min-width: 768px) {
+            .container
+
+        {
+            width: 40%; /* Adjust the width as needed */
+        }
+
+        }
+
+
+        .Dash {
+            background-color: #bd2525;
+            color: white;
+            padding: 1px;
+        }
+
+            .Dash h2 a {
+                text-decoration: none; /* Remove underline */
+                color: white; /* Change link color to blue (you can use any color code or name) */
+            }
+
+            .Dash h2 {
+                color: white;
+            }
+    </style>
+
+
+    @* <script>
+    function checkOtherInterest() {
+    var interestSelect = document.getElementById("Interest");
+    var otherInterestLabel = document.getElementById("OtherInterestLabel");
+    var otherInterestInput = document.getElementById("OtherInterest");
+
+    if (interestSelect.value === "Other") {
+    otherInterestLabel.style.display = "block";
+    otherInterestInput.style.display = "block";
+    } else {
+    otherInterestLabel.style.display = "none";
+    otherInterestInput.style.display = "none";
+    }
+    }
+
+
+
+    </script> *@
+
+  @*   <script>
+        function submitForm() {
+
+            var interestSelect = document.getElementById("Interest");
+            var otherInterestInput = document.getElementById("OtherInterest");
+            debugger;
+            console.log(interestSelect)
+            console.log(otherInterestInput)
+            var counter = @interestsViewModel.InterestCount
+                    // If "Other" is selected and the "OtherInterest" field is not empty
+                    if (interestSelect.value === "Other" && otherInterestInput.value.trim() !== "") {
+                // Set the value of "Interest" to "Other"
+                interestSelect[counter + 1].value = otherInterestInput.value;
+            }
+
+
+            document.forms["AddForm"].submit();
+        }
+    </script> *@
+
+
+
+</head>
+
+<body>
+
+    <div class="Dash">
+        <h2>
+            <a href="/Dashboard/Index">Dashboard</a>
+            <span> | </span>
+            <a href="/Admin/Index">Student List</a>
+            <span> | </span>
+            <a href="/AddStudent/AddStudent">Add Student</a>
+        </h2>
+    </div>
+
+    <div class="container">
+
+        <form name="AddForm" method="post" action="/AddStudent/AddStudent">
+            <h2>Add Student</h2>
+            <div class="form-row">
+                <label for="FullName">Full Name:</label>
+                <input type="text" id="FullName" name="FullName" required>
+            </div>
+
+            <div class="form-row">
+                <label for="RollNo">Roll No:</label>
+                <input type="text" id="RollNo" name="RollNo" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Email">Email Address:</label>
+                <input type="email" id="Email" name="Email" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Gender">Gender:</label>
+                <select id="Gender" name="Gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="DateOfBirth">Date of Birth:</label>
+                <input type="date" id="DateOfBirth" name="DateOfBirth" required>
+            </div>
+
+            <div class="form-row">
+                <label for="City">City:</label>
+                <select id="City" name="City" required>
+                    <option value="" disabled selected>Select a city</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Multan">Multan</option>
+                    <option value="Gujranwala">Gujranwala</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                    <option value="Sialkot">Sialkot</option>
+                    <option value="Bahawalpur">Bahawalpur</option>
+                    <option value="Sargodha">Sargodha</option>
+                    <option value="Sukkur">Sukkur</option>
+                    <option value="Larkana">Larkana</option>
+                    <option value="Gujrat">Gujrat</option>
+                    <option value="Jhang">Jhang</option>
+                    <option value="Sheikhupura">Sheikhupura</option>
+                    <option value="Mardan">Mardan</option>
+                    <option value="Kasur">Kasur</option>
+                    <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+                    <option value="Swabi">Swabi</option>
+                    <option value="Mandi Bahauddin">Mandi Bahauddin</option>
+                    <option value="Chiniot">Chiniot</option>
+                    <option value="Hafizabad">Hafizabad</option>
+                    <option value="Sahiwal">Sahiwal</option>
+                    <option value="Attock">Attock</option>
+                    <option value="Okara">Okara</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="Interest">Interest:</label>
+                <select id="Interest" name="Interest" onchange="checkOtherInterest(this.value)" required>
+                    <option value="">Select an interest</option>
+                    @foreach (var interest in ViewBag.Interests)
+                    {
+                        <option value="@interest.Interest1">@interest.Interest1</option>
+                    }
+                    <option value="Other">Other</option>
+                </select>
+                <br>
+                <label id="OtherInterestLabel" for="OtherInterest" style="display: none; margin-top: 5px;">Other Interest:</label>
+                <input type="text" id="OtherInterest" name="OtherInterest" style="display: none; margin-top: 5px;" placeholder="Enter other interest" required>
+            </div>
+
+            <script>
+                function checkOtherInterest(selectedValue) {
+                    var otherInterestLabel = document.querySelector('label[for="OtherInterest"]');
+                    var otherInterestInput = document.getElementById('OtherInterest');
+
+                    if (selectedValue === 'Other') {
+                        otherInterestLabel.style.display = 'inline-block';
+                        otherInterestLabel.style.marginTop = '5px';
+                        otherInterestInput.style.display = 'inline-block';
+                        otherInterestInput.style.marginTop = '5px';
+                        otherInterestInput.setAttribute('required', 'required');
+                    } else {
+                        otherInterestLabel.style.display = 'none';
+                        otherInterestInput.style.display = 'none';
+                        otherInterestInput.removeAttribute('required');
+                    }
+                }
+            </script>
+
+            @*    <div class="form-row">
+            <label for="Interest">Interest:</label>
+            <select id="Interest" name="Interest" onchange="checkOtherInterest()" required>
+            <option value="">Select an interest</option>
+            @foreach (var interest in ViewBag.Interests)
+            {
+            <option value="@interest.Interest1">@interest.Interest1</option>
+            }
+            <option value="Other">Other</option>
+            </select>
+            <br>
+            <label id="OtherInterestLabel" for="OtherInterest" style="display: none; margin-top: 5px;">Other Interest:</label>
+            <input type="text" id="OtherInterest" name="OtherInterest" style="display: none; margin-top: 5px;" placeholder="Enter other interest">
+            </div>
+
+            <script>
+            function checkOtherInterest(selectedValue) {
+            var otherInterestLabel = document.querySelector('label[for="OtherInterest"]');
+            var otherInterestInput = document.getElementById('OtherInterest');
+
+            if (selectedValue === 'Other') {
+            otherInterestLabel.style.display = 'inline-block';
+            otherInterestLabel.style.marginTop = '5px';
+            otherInterestInput.style.display = 'inline-block';
+            otherInterestInput.style.marginTop = '5px';
+            otherInterestInput.setAttribute('required', 'required');
+            } else {
+            otherInterestLabel.style.display = 'none';
+            otherInterestInput.style.display = 'none';
+            otherInterestInput.removeAttribute('required');
+            }
+            }
+            </script> *@
+            @*             <div class="form-row">
+            <label for="Interest">Interest:</label>
+            <select id="Interest" name="Interest" onchange="checkOtherInterest()" required>
+            <option value="">Select an interest</option>
+            <option value="Programming">Programming</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Psychology">Psychology</option>
+            <option value="Music">Music</option>
+            <option value="Sports">Sports</option>
+            <option value="Other">Other</option>
+            </select>
+            <br>
+            <label id="OtherInterestLabel" for="OtherInterest" style="display: none; margin-top: 5px;">Other Interest:</label>
+            <input type="text" id="OtherInterest" name="OtherInterest" style="display: none; margin-top: 5px;" placeholder="Enter other interest">
+            </div>
+            *@
+
+
+
+            <div class="form-row">
+                <label for="Department">Department:</label>
+                <select id="Department" name="Department" required>
+                    <option value="">Select a department</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Economics">Economics</option>
+                    <option value="History">History</option>
+                    <option value="Political Science">Political Science</option>
+                    <option value="English">English</option>
+                </select>
+            </div>
+
+
+            <div class="form-row">
+                <label for="DegreeTitle">Degree Title:</label>
+                <select id="DegreeTitle" name="DegreeTitle" required>
+                    <option value="">Select a degree</option>
+                    <option value="Associate Degree">Associate Degree</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="Doctoral Degree">Doctoral Degree</option>
+                    <option value="Post Graduate">Post Graduate</option>
+                    <option value="Post Doctoral">Post Doctoral</option>
+                    <option value="MPhil Degree">MPhil Degree</option>
+
+                </select>
+            </div>
+
+
+
+            <div class="form-row">
+                <label for="Subject">Subject:</label>
+                <input type="text" id="Subject" name="Subject" required>
+            </div>
+
+            <div class="form-row">
+                <label for="StartDate">Start Date:</label>
+                <input type="date" id="StartDate" name="StartDate" required>
+            </div>
+
+            <div class="form-row">
+                <label for="EndDate">End Date:</label>
+                <input type="date" id="EndDate" name="EndDate" required>
+            </div>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <p>@ViewBag.ErrorMessage</p>
+            }
+            <input type="submit" @* onclick="submitForm()" *@ value="Create">
+
+            <input type="reset" value="Cancel">
+        </form>
+    </div>
+</body>
+
+</html>
+

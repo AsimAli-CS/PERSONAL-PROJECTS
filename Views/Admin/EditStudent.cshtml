@@ -1,0 +1,201 @@
+﻿@model ProjectStudentSystem.Models.AddStudent
+
+@{
+    ViewBag.Title = "Student Interests System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Interests System</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%; /* Decreased the width to 60% */
+            margin: 20px auto;
+        }
+
+        form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+            box-sizing: border-box; /* Include padding and border in the total width/height */
+        }
+
+        h2 {
+            color: #ff4500;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+            .form-row label {
+                float: left;
+                width: 45%;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
+
+            .form-row input,
+            .form-row select {
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                padding: 8px;
+                margin-left: 5px;
+                background-color: #555;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+            }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #ff4500;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        /* Center the form on larger screens */
+        media (min-width: 768px) {
+            .container}
+
+        {
+            width: 40%; /* Adjust the width as needed */
+        }
+
+        .Dash {
+            background-color: #bd2525;
+            color: white;
+            padding: 1px;
+        }
+
+            .Dash h2 a {
+                text-decoration: none; /* Remove underline */
+                color: white; /* Change link color to blue (you can use any color code or name) */
+            }
+
+            .Dash h2 {
+                color: white;
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="Dash">
+        <h2>
+            <a href="/Dashboard/Index">Dashboard</a>
+            <span> | </span>
+            <a href="/Admin/Index">Student List</a>
+            <span> | </span>
+            <a href="/AddStudent/AddStudent">Add Student</a>
+        </h2>
+    </div>
+    <div class="container">
+
+        <form method="post" action="/Admin/EditStudent">
+            <h2>Edit Student</h2>
+            <div class="form-row">
+                <input type="hidden" name="Id" value="@Model.Id">
+                <label for="FullName">Full Name:</label>
+                <input type="text" id="FullName" name="FullName" value="@Model.FullName" required>
+            </div>
+
+            <div class="form-row">
+                <label for="RollNo">Roll No:</label>
+                <input type="text" id="RollNo" name="RollNo" value="@Model.RollNo" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Email">Email Address:</label>
+                <input type="email" id="Email" name="Email" value="@Model.Email" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Gender">Gender:</label>
+                <select id="Gender" name="Gender" value="@Model.Gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="DateOfBirth">Date of Birth:</label>
+                <input type="date" id="DateOfBirth" name="DateOfBirth" value="@((Model.DateOfBirth != DateTime.MinValue) ? Model.DateOfBirth.ToString("yyyy-MM-dd") : string.Empty)" required>
+            </div>
+
+            <div class="form-row">
+                <label for="City">City:</label>
+                <input type="text" id="City" name="City" value="@Model.City" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Interest">Interest:</label>
+                <input type="text" id="Interest" name="Interest" value="@Model.Interest" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Department">Department:</label>
+                <input type="text" id="Department" name="Department" value="@Model.Department" required>
+            </div>
+
+            <div class="form-row">
+                <label for="DegreeTitle">Degree Title:</label>
+                <input type="text" id="DegreeTitle" name="DegreeTitle" value="@Model.DegreeTitle" required>
+            </div>
+
+            <div class="form-row">
+                <label for="Subject">Subject:</label>
+                <input type="text" id="Subject" name="Subject" value="@Model.Subject" required>
+            </div>
+            <div class="form-row">
+                <label for="StartDate">Start Date:</label>
+                <input type="date" id="StartDate" name="StartDate" value="@((Model.StartDate != DateTime.MinValue) ? Model.StartDate.ToString("yyyy-MM-dd") : string.Empty)" required>
+            </div>
+
+
+            <div class="form-row">
+                <label for="EndDate">End Date:</label>
+                <input type="date" id="EndDate" name="EndDate" value="@((Model.EndDate != DateTime.MinValue) ? Model.EndDate.ToString("yyyy-MM-dd") : string.Empty)" required>
+            </div>
+
+
+            <input type="submit" value="Update">
+            @* <input type="reset" value="Cancel"> *@
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+﻿<!-- _LoginPartial.cshtml -->
+@if (ViewBag.AuthenticationStatus != null && (bool)ViewBag.AuthenticationStatus)
+{
+    <a href="/login/login">Logout</a>
+}
+else
+{
+    <a href="/login/login">Login</a>
+}

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111; /* Light black background */
+            color: #fff;
+        }
+
+        nav {
+            background-color: #000; /* Navbar black background */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size:large;
+        }
+
+            nav a {
+                color: #ff0000; /* Navbartext red */
+                text-decoration: none;
+                padding: 10px;
+                margin: 0 5px;
+                font-style:italic;
+                font-size:20px
+            }
+
+        .login-button {
+            background-color: #ff0000; /* Red color */
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size:large;
+        }
+
+        footer {
+            background-color: #000; /* Footer background black */
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+            footer p, footer li {
+                color: #ff0000; /* Footer text red */
+                list-style: none;
+                margin: 0;
+                padding: 5px;
+            }
+
+        main {
+            padding: 20px;
+        }
+    </style>
+    <title>Student Interest System</title>
+</head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Additional head elements go here -->
+</head>
+<body>
+    <nav>
+        <a href="#">Student Interest System</a>
+        <div id="loginPartial">
+            <a href="#">Home</a>
+            
+
+
+            @if (ViewContext.HttpContext.Request.Cookies["IsAuthenticated"] == "true")
+            {
+                <a href="/Account/Logout">Logout</a>
+            }
+            else
+            {
+                <a href="/login/Login">Login</a>
+            }
+           
+
+        </div>
+    </nav>
+
+    <div id="main-content">
+        @RenderBody() <!-- This is where the content of the specific view will be inserted -->
+    </div>
+
+    <footer>
+        <p><strong>EMAIL:</strong> BCSF20M036@pucit.edu.pk</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿@model ProjectStudentSystem.Models.AddStudent
+
+@{
+    ViewBag.Title = "Student Interests System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Interests System</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 20px auto;
+        }
+
+        form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #ff4500;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+            .form-row label {
+                float: left;
+                width: 45%;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
+
+            .form-row span {
+                float: left;
+                width: 50%;
+                box-sizing: border-box;
+                padding: 8px;
+                margin-left: 5px;
+                background-color: #555;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                display: block;
+                overflow: hidden;
+            }
+
+        /* Center the form on larger screens */
+        media (min-width: 768px) {
+            .container {
+                width: 40%;
+            }
+        }
+
+        .Dash {
+            background-color: #bd2525;
+            color: white;
+            padding: 1px;
+        }
+
+            .Dash h2 a {
+                text-decoration: none; /* Remove underline */
+                color: white; /* Change link color to blue (you can use any color code or name) */
+            }
+
+            .Dash h2{
+                color:white;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="Dash">
+        <h2>
+            <a href="/Dashboard/Index">Dashboard</a>
+            <span> | </span>
+            <a href="/Admin/Index">Student List</a>
+            <span> | </span>
+            <a href="/AddStudent/AddStudent">Add Student</a>
+        </h2>
+    </div>
+    <div class="container">
+
+        <form method="post" action="/AddStudent/AddStudent">
+            <h2>Your Details</h2>
+
+            <div class="form-row">
+                <label for="FullName">Full Name:</label>
+                <span>@Model.FullName</span>
+            </div>
+
+            <div class="form-row">
+                <label for="RollNo">Roll No:</label>
+                <span>@Model.RollNo</span>
+            </div>
+
+            <div class="form-row">
+                <label for="Email">Email Address:</label>
+                <span>@Model.Email</span>
+            </div>
+
+            <div class="form-row">
+                <label for="Gender">Gender:</label>
+                <span>@Model.Gender</span>
+            </div>
+
+            <div class="form-row">
+                <label for="DateOfBirth">Date of Birth:</label>
+                <span>@Model.DateOfBirth.ToString("MM/dd/yyyy")</span>
+            </div>
+
+            <div class="form-row">
+                <label for="City">City:</label>
+                <span>@Model.City</span>
+            </div>
+
+            <div class="form-row">
+                <label for="Interest">Interest:</label>
+                <span>@Model.Interest</span>
+            </div>
+
+            <div class="form-row">
+                <label for="Department">Department:</label>
+                <span>@Model.Department</span>
+            </div>
+
+            <div class="form-row">
+                <label for="DegreeTitle">Degree Title:</label>
+                <span>@Model.DegreeTitle</span>
+            </div>
+
+            <div class="form-row">
+                <label for="Subject">Subject:</label>
+                <span>@Model.Subject</span>
+            </div>
+
+            <div class="form-row">
+                <label for="StartDate">Start Date:</label>
+                <span>@Model.StartDate.ToString("MM/dd/yyyy")</span>
+            </div>
+
+            <div class="form-row">
+                <label for="EndDate">End Date:</label>
+                <span>@Model.EndDate.ToString("MM/dd/yyyy")</span>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

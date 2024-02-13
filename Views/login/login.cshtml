@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Login - Student Interests System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Interests System</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center; /* Center vertically */
+        }
+
+        form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-left: auto;
+            overflow: hidden;
+            box-sizing: content-box;
+            width: 38%;
+        }
+
+        h1 {
+            color: #ff4500;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .form-row {
+            margin-bottom: 50px;
+            overflow: hidden;
+        }
+
+            .form-row label {
+                float: left;
+                width: 25%;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
+
+            .form-row input {
+                float: left;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 12px;
+                margin-left: 5px;
+                background-color: #555;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+            }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #ff4500;
+            color: #ffffff;
+            border: none;
+            padding: 17px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        img {
+            max-width: 42%;
+            height: auto;
+            border-radius: 10%;
+            margin-right: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="/image/123.jpg" alt="#">
+       
+        <form method="post" action="/login/login">
+            <h1>Login</h1>
+            <div class="form-row">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-row">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <p>@ViewBag.ErrorMessage</p>
+            }
+
+            <input type="submit" value="Login">
+            
+        </form>
+       
+    </div>
+    
+</body>
+
+</html>

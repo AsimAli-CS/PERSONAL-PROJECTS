@@ -1,0 +1,422 @@
+﻿<!-- Views/Dashboard/Index.cshtml -->
+@{
+    ViewBag.Title = "Login - Student Interests System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ProjectStudentSystem.Models
+@model DashboardViewModel
+
+<!DOCTYPE html>
+<html>
+<style>
+
+    .Dash {
+        background-color: #bd2525;
+        color: white;
+        padding: 1px;
+    }
+
+        .Dash h2 a {
+            text-decoration: none; /* Remove underline */
+            color: white; 
+        }
+    h2 a {
+        text-decoration: none; /* Remove underline */
+        color: white; 
+    }
+
+    .widget-container {
+        width: 200px;
+        float: left;
+        margin-right: 20px;
+    }
+
+        .widget-container h3 {
+            background-color: #3267a1;
+            color: white;
+            padding: 10px;
+            margin: 0;
+            margin-top: 20%;
+        }
+
+    .interest-list, .interest-list1 {
+        list-style-type: none;
+        padding: 10px;
+        margin: 0;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 17px;
+    }
+
+        .interest-list li, .interest-list1 li {
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 12px;
+            background-color: #4CAF50;
+        }
+
+            .interest-list li:last-child, .interest-list1 li:last-child {
+                border-bottom: none;
+            }
+
+        .interest-list1 li {
+            background-color: #d12d2d;
+        }
+
+
+    .custom-interest-box {
+        width: 150px;
+        height: 150px;
+        background-color: #939393;
+        border-radius: 10px;
+        text-align: center;
+        padding-top: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        margin-top: 40%;
+        margin-left: 15%;
+    }
+
+    .custom-interest-number {
+        color: white;
+        font-size: 72px;
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .custom-interest-text {
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 100%;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        font-size: large;
+    }
+
+    .dashboard-widgets {
+        margin-left: 100px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .h2{
+        color:white;
+    }
+</style>
+
+<head>
+    <div><title>Dashboard</title></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="Dash">
+        <h2>
+            <a href="/Dashboard/Index1">Dashboard</a>
+            <span> | </span>
+            <a href="/Admin/Index1">Student List</a>
+        </h2>
+    </div>
+
+    <div class="dashboard-widgets">
+        <div class="widget-container">
+            <h3>Top 5 Interests</h3>
+            <ul class="interest-list">
+                @foreach (var interest in Model.Top5Interests)
+                {
+                    <li>@interest</li>
+                }
+            </ul>
+        </div>
+
+        <div class="widget-container">
+            <h3>Bottom 5 Interests</h3>
+            <ul class="interest-list1">
+                @foreach (var interest in Model.Bottom5Interests)
+                {
+                    <li>@interest</li>
+                }
+            </ul>
+        </div>
+
+        <div class="widget-container">
+            <div class="custom-interest-box">
+                <p class="custom-interest-text">Distinct Interests</p>
+                <p class="custom-interest-number">@Model.DistinctInterestCount</p>
+            </div>
+        </div>
+
+        <div class="widget-container">
+            <h3>City Distribution</h3>
+            <canvas id="cityDistributionChart" width="200" height="200"></canvas>
+        </div>
+
+        <div class="widget-container">
+            <h3>Submission Chart</h3>
+            <canvas id="submissionChart" width="400" height="200"></canvas>
+        </div>
+
+    </div>
+
+
+    <!--Second Dive-->
+    <div class="dashboard-widgets">
+
+        <div class="widget-container">
+            <h3>Age Distribution Chart</h3>
+            <canvas id="ageDistributionChart" width="200" height="200"></canvas>
+        </div>
+
+        <div class="widget-container">
+            <h3>Degree Distribution</h3>
+            <canvas id="degreeDistributionChart" width="200" height="200"></canvas>
+        </div>
+
+        <div class="widget-container">
+            <h3>Department Distribution</h3>
+            <canvas id="departmentDistributionChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="widget-container">
+            <h3>Gender Distribution</h3>
+            <canvas id="genderDistributionChart" width="200" height="200"></canvas>
+        </div>
+             
+       
+    </div>
+
+
+
+    <!-- Third Div-->
+    <div class="dashboard-widgets" style="height:200px"  >
+        <div class="widget-container">
+            <h3>Most Active Hours Last 30 Days</h3>
+            <ul>
+                @foreach (var hour in Model.MostActiveHoursLast30Days)
+                {
+                    <li>Hour: @hour</li>
+                }
+            </ul>
+        </div>
+
+        <div class="widget-container">
+            <h3>Students Status Grid</h3>
+            <table>
+                <tr>
+                    <td>Currently Studying:</td>
+                    <td>@Model.StudentStatusData.CurrentlyStudying</td>
+                </tr>
+                <tr>
+                    <td>Recently Enrolled:</td>
+                    <td>@Model.StudentStatusData.RecentlyEnrolled</td>
+                </tr>
+                <tr>
+                    <td>About to Graduate:</td>
+                    <td>@Model.StudentStatusData.AboutToGraduate</td>
+                </tr>
+                <tr>
+                    <td>Graduated:</td>
+                    <td>@Model.StudentStatusData.Graduated</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="widget-container">
+            <h3>Least Active Hours Last 30 Days</h3>
+            <ul>
+                @foreach (var hour in Model.LeastActiveHoursLast30Days)
+                {
+                    <li>Hour: @hour</li>
+                }
+            </ul>
+        </div>
+
+        <div class="widget-container">
+            <h3>Dead Hours Last 30 Days</h3>
+            <ul>
+                @foreach (var hour in Model.DeadHoursLast30Days)
+                {
+                    <li>Dead Hour: @hour</li>
+                }
+            </ul>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        var genderData = {
+            labels: @Html.Raw(Json.Serialize(Model.GenderDistributionLabels)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.GenderDistributionData)),
+                backgroundColor: [
+                    'blue',
+                    'pink', 
+                ],
+            }],
+        };
+
+        var genderCtx = document.getElementById('genderDistributionChart').getContext('2d');
+        var genderPieChart = new Chart(genderCtx, {
+            type: 'pie',
+            data: genderData,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'white'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var degreeData = {
+            labels: @Html.Raw(Json.Serialize(Model.DegreeDistributionLabels)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.DegreeDistributionData)),
+                backgroundColor: [
+                    'orange',
+                    'yellow',
+                    'green',
+                    'red',
+                    'blue',
+                    
+                    
+                    
+                ],
+            }],
+        };
+
+        var degreeCtx = document.getElementById('degreeDistributionChart').getContext('2d');
+        var degreePieChart = new Chart(degreeCtx, {
+            type: 'pie',
+            data: degreeData,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'white'
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        var departmentData = {
+            labels: @Html.Raw(Json.Serialize(Model.DepartmentDistributionLabels)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.DepartmentDistributionData)),
+                backgroundColor: [
+                    'black',
+                    'green',
+                    'purple',
+                    'yellow',
+                    'orange',
+                ],
+            }],
+        };
+
+        var departmentCtx = document.getElementById('departmentDistributionChart').getContext('2d');
+        var departmentPieChart = new Chart(departmentCtx, {
+            type: 'pie',
+            data: departmentData,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'white'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('ageDistributionChart').getContext('2d');
+        var ageDistributionChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(Model.AgeDistributionData.Select((_, index) => index + 1))),
+                datasets: [{
+                    label: 'Number of Students',
+                    data: @Html.Raw(Json.Serialize(Model.AgeDistributionData)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+    </script>
+
+    <script>
+        var cityData = {
+            labels: @Html.Raw(Json.Serialize(Model.CityDistributionLabels)),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.CityDistributionData)),
+                backgroundColor: [
+                    'red',
+                    'blue',
+                    'green',
+                    'yellow',
+                    'orange',
+                ],
+            }],
+        };
+
+        var cityCtx = document.getElementById('cityDistributionChart').getContext('2d');
+        var cityPieChart = new Chart(cityCtx, {
+            type: 'pie',
+            data: cityData,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'white'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var submissionData = {
+            labels: @Html.Raw(Json.Serialize(Model.SubmissionChartData)),
+            datasets: [{
+                label: 'Students Created Daily',
+                data: @Html.Raw(Json.Serialize(Model.SubmissionChartData)),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false
+            }]
+        };
+
+        var submissionCtx = document.getElementById('submissionChart').getContext('2d');
+        var submissionLineChart = new Chart(submissionCtx, {
+            type: 'line',
+            data: submissionData,
+            options: {
+            }
+        });
+    </script>
+</body>
+</html>
